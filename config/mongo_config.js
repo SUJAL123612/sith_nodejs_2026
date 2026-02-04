@@ -10,14 +10,12 @@ const client = new MongoClient(url);
 const dbName = process.env.MG_DATABASE;
 
 client.connect()
-  .then(() => {
-    console.log("MongoDB connected successfully..");
-    client.dbInstance = client.db(dbName);
-  })
-  .catch(err => {
-    console.error("Connection error:", err);
-  });
-  
-client.db(dbName);
+	.then(() => {
+		console.log("MongoDB connected successfully..");
+		client.dbInstance = client.db(dbName);
+	})
+	.catch(err => {
+		console.error("Connection error:", err);
+	});
 
-module.exports= client;
+module.exports = client;
