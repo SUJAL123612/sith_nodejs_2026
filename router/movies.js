@@ -13,6 +13,15 @@ module.exports = function(app, client){
     });
 
     // GET URLs
+      // URL: /movies/api/v1/get_movie/:id
+      app.get(currPath + "/get_movie/:id", function(req,res){
+
+        let urlLogicOBJ = require(__dirname + "/../src/movies/get_movie.js");
+        // require("../src/movies/get_movie")
+        urlLogicOBJ.main(req, res, client);
+        
+    });
+
     // URL: /movies/api/v1/get_movie_list
     app.get(currPath + "/get_movie_list", function(req,res){
 

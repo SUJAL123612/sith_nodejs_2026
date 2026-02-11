@@ -19,7 +19,7 @@ function main(req, res, client) {
         suceess: false,
         data: null,
         err: err.message,
-        err_id: 1000024,
+        err_id: 1000017,
       };
 
       res.status(400).send(response_obj);
