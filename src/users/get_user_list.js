@@ -1,5 +1,5 @@
-function main(req, res, client) { 
-
+function main(req, res, client, appEnv) { 
+console.log("get_user_list",appEnv);
     // Query params
     let search_text = req.query.search_text ? req.query.search_text : null;
     let sort_by = req.query.sort_by ? req.query.sort_by : "id";
@@ -23,12 +23,13 @@ function main(req, res, client) {
         }
         catch (err) {
             console.log("Error parsing page_index and page_size:", err);
-            res.status(400).send({
-                success: false,
-                data: null,
-                err: "Error parsing pagination params",
-                err_id: "1000013"
-            });
+            // res.status(400).send({
+            //     success: false,
+            //     data: null,
+            //     err: "Error parsing pagination params",
+            //     err_id: "1000013"
+            // });
+            appEnv.responseGenerator.sendResponse(res, true, 400, null, { msg: "Error parsing pagination params" }, appEnv.getCurrentLine());
             return;
         }
     }
@@ -63,12 +64,13 @@ function main(req, res, client) {
 
         if (err) {
             console.log(err);
-            res.status(400).send({
-                success: false,
-                data: null,
-                err: err,
-                err_id: "1000012"
-            });
+            // res.status(400).send({
+            //     success: false,
+            //     data: null,
+            //     err: err,
+            //     err_id: "1000012"
+            // });
+            appEnv.responseGenerator.sendResponse(res, true, 400, null, err, appEnv.getCurrentLine());
             return;
         }
 
@@ -81,13 +83,15 @@ function main(req, res, client) {
             finalData = fullData.slice(skip_records, skip_records + limit_records);
         }
 
-        res.status(200).send({
-            success: true,
-            total_records: fullData.length,
-            data: finalData,
-            err: null,
-            err_id: null
-        });
+        // res.status(200).send({
+        //     success: true,
+        //     total_records: fullData.length,
+        //     data: finalData,
+        //     err: null,
+        //     err_id: null
+        // });
+        appEnv.responseGenerator.sendResponse(res, false, 200,finalData, null, null);
+        
     });
 }
 

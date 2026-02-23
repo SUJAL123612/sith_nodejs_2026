@@ -1,5 +1,6 @@
 
-module.exports = function(app, client){
+module.exports = function(app, client, appEnv){
+    console.log("file_system route",appEnv);
     let currPath = "/file_system";
 
 
@@ -35,7 +36,7 @@ module.exports = function(app, client){
 
         let urlLogicOBJ = require(__dirname + "/../src/file_system/write_file.js");
         // require("../src/file_system/write_file")
-        urlLogicOBJ.main(req, res, client);
+        urlLogicOBJ.main(req, res, client, appEnv);
         
     });
 
@@ -44,7 +45,7 @@ module.exports = function(app, client){
 
         let urlLogicOBJ = require(__dirname + "/../src/file_system/write_file_async.js");
         // require("../src/file_system/write_file_async)
-        urlLogicOBJ.main(req, res, client);
+        urlLogicOBJ.main(req, res, client, appEnv);
         
     });
 
@@ -53,7 +54,7 @@ module.exports = function(app, client){
 
         let urlLogicOBJ = require(__dirname + "/../src/file_system/write_file_stream.js");
         // require("../src/file_system/write_file_stream)
-        urlLogicOBJ.main(req, res, client);
+        urlLogicOBJ.main(req, res, client, appEnv);
         
     });    
     
@@ -62,7 +63,7 @@ module.exports = function(app, client){
     // URL: /file_system/upload_document/
 	app.post(currPath + "/upload_document/", upload.single('file'), function (req, res) {
 		let urlLogicOBJ = require(__dirname + "/../src/file_system/upload_document.js");//file path
-		urlLogicOBJ.main(req, res, client);
+		urlLogicOBJ.main(req, res, client, appEnv);
 	});
     
     // Get URLs
@@ -72,7 +73,7 @@ module.exports = function(app, client){
 
         let urlLogicOBJ = require(__dirname + "/../src/file_system/read_file.js");
         // require("../src/file_system/read_file)
-        urlLogicOBJ.main(req, res, client);       
+        urlLogicOBJ.main(req, res, client, appEnv);       
     });
 
     // URL: /user/api/v1/read_file_async
@@ -80,7 +81,7 @@ module.exports = function(app, client){
 
         let urlLogicOBJ = require(__dirname + "/../src/file_system/read_file_async.js");
         // require("../src/file_system/read_file_async)
-        urlLogicOBJ.main(req, res, client);       
+        urlLogicOBJ.main(req, res, client, appEnv);       
     });
 
     // URL: /user/api/v1/read_file_stream
@@ -88,7 +89,7 @@ module.exports = function(app, client){
 
         let urlLogicOBJ = require(__dirname + "/../src/file_system/read_file_stream.js");
         // require("../src/file_system/read_file_stream)
-        urlLogicOBJ.main(req, res, client);
+        urlLogicOBJ.main(req, res, client, appEnv);
         
     });
 
@@ -99,7 +100,7 @@ module.exports = function(app, client){
 
         let urlLogicOBJ = require(__dirname + "/../src/file_system/append_file.js");
         // require("../src/file_system/append_file)
-        urlLogicOBJ.main(req, res, client);
+        urlLogicOBJ.main(req, res, client, appEnv);
         
     });
 
@@ -108,7 +109,7 @@ module.exports = function(app, client){
 
         let urlLogicOBJ = require(__dirname + "/../src/file_system/append_file_async.js");
         // require("../src/file_system/append_file_async)
-        urlLogicOBJ.main(req, res, client);
+        urlLogicOBJ.main(req, res, client, appEnv);
         
     });
 

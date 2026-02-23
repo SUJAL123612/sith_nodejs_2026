@@ -1,7 +1,8 @@
 console.log("Hello Buddy");
 const express = require('express')
 const app = express()
-
+const appEnv = require('./src/base/appEnvironmentBuilder').getAppEnvironment(__dirname);
+console.log("app.js => ",appEnv);
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
@@ -16,12 +17,13 @@ app.get('/param/:id/:name/:depart', (req, res) => {
 })
 
 
+
 const bodyParser = require('body-parser')
 app.use(bodyParser.json())
 app.get('/body/', (req, res) => {
   res.send(req.body)
 })
-require('./router')(app);
+require('./router')(app, appEnv);
 
 // const { MongoClient, ObjectId } = require('mongodb');
 

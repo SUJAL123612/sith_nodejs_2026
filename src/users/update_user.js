@@ -1,18 +1,19 @@
-function main(req, res, client) {
-
+function main(req, res, client, appEnv) {
+console.log("Update_user",appEnv);
     let { id, first_name, email} = req.body;
 
     if(id == "" || id == null || id == 0)
     {
-        const response_obj = {
-            "suceess": true,
-            "data": {
-                msg : "Id required !!"
-            },
-            "err": null,
-            "err_id": null
-        }
-        res.status(200).send(response_obj);
+        // const response_obj = {
+        //     "suceess": true,
+        //     "data": {
+        //         msg : "Id required !!"
+        //     },
+        //     "err": null,
+        //     "err_id": null
+        // }
+        // res.status(200).send(response_obj);
+        appEnv.responseGenerator.sendResponse(res, false, 200, { msg: "Id required !!" }, null, null);
         return;
     }
 
@@ -21,13 +22,14 @@ function main(req, res, client) {
     client.query(selectQuery, [id], (err, data) => {
         if (err) {
             console.log(err);
-            const response_obj = {
-                "suceess": false,
-                "data": null,
-                "err": err,
-                "err_id": "100021"
-            }
-            res.status(400).send(response_obj);
+            // const response_obj = {
+            //     "suceess": false,
+            //     "data": null,
+            //     "err": err,
+            //     "err_id": "100021"
+            // }
+            // res.status(400).send(response_obj);
+            appEnv.responseGenerator.sendResponse(res, true, 400, null, err, appEnv.getCurrentLine());
             return;
         }
 
@@ -43,24 +45,26 @@ function main(req, res, client) {
         client.query(updateQuery, values, (err, data) => {
             if (err) {
                 console.log(err);
-                const response_obj = {
-                    "suceess": false,
-                    "data": null,
-                    "err": err,
-                    "err_id": "100042"
-                }
-                res.status(400).send(response_obj);
+                // const response_obj = {
+                //     "suceess": false,
+                //     "data": null,
+                //     "err": err,
+                //     "err_id": "100042"
+                // }
+                // res.status(400).send(response_obj);
+                appEnv.responseGenerator.sendResponse(res, true, 400, null, err, appEnv.getCurrentLine());
                 return;
             }
             console.log("Data Updated Successfully");
             console.log(data.rows[0]);
-            const response_obj = {
-                "suceess": true,
-                "data": data.rows[0],
-                "err": null
-            }
-            // res.status(200).send("Data Update Successfully");
-            res.status(200).send(response_obj);
+            // const response_obj = {
+            //     "suceess": true,
+            //     "data": data.rows[0],
+            //     "err": null
+            // }
+            // // res.status(200).send("Data Update Successfully");
+            // res.status(200).send(response_obj);
+            appEnv.responseGenerator.sendResponse(res, false, 200, data.rows[0], null, null);
         });
     });
 }

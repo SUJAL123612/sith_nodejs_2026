@@ -1,4 +1,5 @@
-function main(req, res, client){
+function main(req, res, client, appEnv){
+    console.log("Read_File_Stream",appEnv);
     const fs = require('fs');
     // var dataLen;
     var dataLen = 0;
@@ -19,7 +20,8 @@ function main(req, res, client){
         console.log("Data vanished From Memory");
     });
 
-    res.send("Read data successfully");
+    // res.send("Read data successfully");
+    appEnv.responseGenerator.sendResponse(res, false, 200, {msg : "Read Data Successfully"}, null, null);
 }
 
 module.exports={

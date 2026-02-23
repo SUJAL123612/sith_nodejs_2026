@@ -1,4 +1,5 @@
-function main(req, res, client){
+function main(req, res, client, appEnv){
+    console.log("Read_File",appEnv);
     const fs = require('fs');
     // fs.writeFileSync("write_data_stream.txt", "hello World, i am sanket");
     
@@ -9,7 +10,9 @@ function main(req, res, client){
         console.log(i);
     }
     fs.writeFileSync("write_data_stream.txt", temp_data);
-    res.send("Write data successfully");
+    // res.send("Write data successfully");
+    appEnv.responseGenerator.sendResponse(res, false, 200, { msg : "Write Data Successfully" , data : temp_data}, null, null);
+    return;
 }
 
 module.exports={

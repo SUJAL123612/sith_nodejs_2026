@@ -1,5 +1,6 @@
 
-module.exports = function(app, client){
+module.exports = function(app, client, appEnv){
+    console.log("Email route",appEnv);
     let currPath = "/email";
 
     // Get URLs
@@ -8,7 +9,7 @@ module.exports = function(app, client){
 
         let urlLogicOBJ = require(__dirname + "/../src/email/send_email.js");
         // require("../src/email/send_email")
-        urlLogicOBJ.main(req, res, client);
+        urlLogicOBJ.main(req, res, client, appEnv);
         
     });
 }

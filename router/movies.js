@@ -1,5 +1,6 @@
 
-module.exports = function(app, client){
+module.exports = function(app, client, appEnv){
+    console.log("movie route",appEnv);
     let currPath = "/movies";
 
     // POST URLs
@@ -8,7 +9,7 @@ module.exports = function(app, client){
 
         let urlLogicOBJ = require(__dirname + "/../src/movies/create_movie.js");
         // require("../src/movies/create_movie")
-        urlLogicOBJ.main(req, res, client);
+        urlLogicOBJ.main(req, res, client, appEnv);
         
     });
 
@@ -18,7 +19,7 @@ module.exports = function(app, client){
 
         let urlLogicOBJ = require(__dirname + "/../src/movies/get_movie.js");
         // require("../src/movies/get_movie")
-        urlLogicOBJ.main(req, res, client);
+        urlLogicOBJ.main(req, res, client, appEnv);
         
     });
 
@@ -27,7 +28,7 @@ module.exports = function(app, client){
 
         let urlLogicOBJ = require(__dirname + "/../src/movies/get_movie_list.js");
         // require("../src/movies/get_movie_list")
-        urlLogicOBJ.main(req, res, client);
+        urlLogicOBJ.main(req, res, client, appEnv);
         
     });
 
@@ -37,7 +38,7 @@ module.exports = function(app, client){
 
         let urlLogicOBJ = require(__dirname + "/../src/movies/update_movie.js");
         // require("../src/movies/update_movie")
-        urlLogicOBJ.main(req, res, client);
+        urlLogicOBJ.main(req, res, client, appEnv);
         
     });
 
@@ -47,7 +48,7 @@ module.exports = function(app, client){
 
         let urlLogicOBJ = require(__dirname + "/../src/movies/delete_movie.js");
         // require("../src/movies/delete_movie")
-        urlLogicOBJ.main(req, res, client);
+        urlLogicOBJ.main(req, res, client, appEnv);
         
     });
 }

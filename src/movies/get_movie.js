@@ -1,11 +1,13 @@
 const { ObjectId } = require('mongodb');
 
-function main(req, res, client) {
+function main(req, res, client, appEnv) {
+    console.log("Get_Movie",appEnv);
 
     let id = req.params.id;
 
     if (id.length != 24) {
-        res.status(400).json({ message: "Correct ID Required !!" });
+        // res.status(400).json({ message: "Correct ID Required !!" });
+        appEnv.responseGenerator.sendResponse(res, true, 400, null, { msg: "Correct ID Required !!" }, appEnv.getCurrentLine());
         return;
     }
     client.dbInstance
@@ -13,22 +15,24 @@ function main(req, res, client) {
         .findOne({ _id: new ObjectId(id) })
         .then(data => {
             if (!data) {
-                const response_obj = {
-                    suceess: false,
-                    data: null,
-                    err: "Movie not found",
-                    err_id: "100015"
-                };
-                res.status(400).send(response_obj);
+                // const response_obj = {
+                //     suceess: false,
+                //     data: null,
+                //     err: "Movie not found",
+                //     err_id: "100015"
+                // };
+                // res.status(400).send(response_obj);
+                appEnv.responseGenerator.sendResponse(res, true, 400, null, { msg: "Movie not found" }, appEnv.getCurrentLine());
                 return;
             }
-            const response_obj = {
-                suceess: true,
-                data: data,
-                err: null,
-                err_id: null
-            };
-            res.status(200).send(response_obj);
+            // const response_obj = {
+            //     suceess: true,
+            //     data: data,
+            //     err: null,
+            //     err_id: null
+            // };
+            // res.status(200).send(response_obj);
+            appEnv.responseGenerator.sendResponse(res, false, 200,data, null, null);
             return;
         })
         .catch(err => {

@@ -1,4 +1,5 @@
-function main(req, res, client){
+function main(req, res, client, appEnv){
+    console.log("Write_File_Stream",appEnv);
     const fs = require('fs');
     // x = fs.createReadStream("write_data_stream.txt");
     // y = fs.createWriteStream("output.txt");
@@ -7,7 +8,9 @@ function main(req, res, client){
     y = fs.createWriteStream(req.body.output_file);
     x.pipe(y);
     console.log(req.body.output_file);
-    res.send("write data successfully");
+    // res.send("write data successfully");
+    appEnv.responseGenerator.sendResponse(res, false, 200, { msg : "Write Data Successfully" }, null, null);
+    return;
 }
 
 

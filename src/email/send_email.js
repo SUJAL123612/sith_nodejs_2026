@@ -1,7 +1,8 @@
 const nodemailer = require("nodemailer");
 require('dotenv').config();
 
-async function main(req, res, client) {
+async function main(req, res, client, appEnv) {
+    console.log("Send_Email",appEnv);
     let transporter = nodemailer.createTransport({
         host: process.env.NM_HOST,
         port: process.env.NM_PORT,
@@ -23,8 +24,9 @@ async function main(req, res, client) {
 
     console.log("Message sent: %s", info.messageId);
     console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-    res.send("Hello");
-   
+    // res.send("Hello");
+    appEnv.responseGenerator.sendResponse(res, false, 200, {msg : "Hello" }, null, null);
+    return;
 }
 
 
