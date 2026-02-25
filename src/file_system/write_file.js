@@ -1,5 +1,5 @@
 function main(req, res, client, appEnv){
-    console.log("Read_File",appEnv);
+    console.log("Write_File",appEnv);
     const fs = require('fs');
     // fs.writeFileSync("write_data_stream.txt", "hello World, i am sanket");
     
